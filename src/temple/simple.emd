@@ -9,11 +9,11 @@
 %><%=
     status.behind?"▼"~to!string(status.behind):""
 %><%=
-    status.new_files?"○"~to!string(status.new_files):""
+    status.new_files?"□"~to!string(status.new_files):""
 %><%=
     status.index_files?"■"~to!string(status.index_files):""
 %><%=
-    status.working_files?"□"~to!string(status.working_files):""
+    status.working_files?"▣"~to!string(status.working_files):""
 %><%=
     status.stash?"▷"~to!string(status.stash):""
 %><%=
