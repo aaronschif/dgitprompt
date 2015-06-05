@@ -1,0 +1,11 @@
+% import gitstatus : GitStatus;
+% GitStatus status = var.status.get!GitStatus;
+Path:      <%= status.path %>
+Branch:    <%= status.branch %>
+State:     <%= status.state %>
+Ahead:     <%= status.ahead %>
+Behind:    <%= status.behind %>
+Files
+    New:       <%= status.new_files %>
+    Index:     <%= status.index_files %>
+    Working:   <%= status.working_files %>

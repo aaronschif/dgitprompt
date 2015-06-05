@@ -1,0 +1,20 @@
+{{#GIT
+}}{{#BRANCH
+    }}{{branch}}{{/BRANCH
+}}{{^BRANCH
+}}EMPTY{{/BRANCH
+}}{{#NEW
+    }}○{{new}}{{/NEW
+}}{{#INDEX
+    }}■{{index}}{{/INDEX
+}}{{#WORKING
+    }}□{{working}}{{/WORKING
+}}{{#AHEAD
+    }}▲{{ahead}}{{/AHEAD
+}}{{#BEHIND
+    }}▼{{behind}}{{/BEHIND
+}}{{#STASH
+    }}▷{{stash}}{{/STASH
+}}{{#STATE
+    }}◊{{state_name}}{{/STATE
+}}{{/GIT}}

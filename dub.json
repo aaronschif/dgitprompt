@@ -1,0 +1,16 @@
+{
+	"name": "dgitprompt",
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2015, aaron",
+	"authors": ["aaron"],
+	"versions": ["VibeCustomMain"],
+	"preGenerateCommands-posix": ["make cdeps"],
+	"lflags": ["./source/c/git.o"],
+	"dflags": ["-Jsrc/temple"],
+	"dependencies": {
+		"libgit2": "~>0.20.1",
+		"temple": "~>0.7.3",
+		"pathlib": "~>0.1.2",
+		"mustache-d": "~>0.1.1"
+	}
+}
