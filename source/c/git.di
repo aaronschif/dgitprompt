@@ -8,7 +8,7 @@ struct CGitStatus{
     int index_files;
     int stash;
     int state;
-
+    const(char) *tag;
     const(char) *branch;
 };
 

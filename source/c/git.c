@@ -8,7 +8,7 @@ typedef struct GitStatus{
     int index_files;
     int stash;
     int state;
-
+    const char *tag;
     const char *branch;
 } git_status;
 
@@ -20,7 +20,26 @@ void get_branch(git_repository *repo, git_status *status) {
 
     git_reference *head = NULL;
     git_repository_head(&head, repo);
-    status->branch = git_reference_shorthand(head);
+    if (git_reference_is_branch(head))
+        status->branch = git_reference_shorthand(head);
+    else
+        status->branch = NULL;
+}
+
+void get_tag(git_repository *repo, git_status *status) {
+    const git_oid *local_oid;
+    git_reference *head;
+    git_tag *tag;
+
+    if (git_repository_head(&head, repo)) return;
+    local_oid = git_reference_target(head);
+
+    if (git_tag_lookup(&tag, repo, local_oid)) {
+        status->tag = NULL;
+        return;
+    }
+    status->tag = git_tag_name(tag);
+    git_tag_free(tag);
 }
 
 void get_state(git_repository *repo, git_status *status) {
@@ -79,6 +98,7 @@ void find_status(git_status* status, char* path) {
     git_libgit2_init();
     git_repository_open(&repo, path);
 
+    get_tag(repo, status);
     get_state(repo, status);
     get_branch(repo, status);
     get_stash(repo, status);
