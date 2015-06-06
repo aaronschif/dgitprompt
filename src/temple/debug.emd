@@ -2,6 +2,7 @@
 % GitStatus status = var.status.get!GitStatus;
 Path:      <%= status.path %>
 Branch:    <%= status.branch %>
+Tag:       <%= status.tag %>
 State:     <%= status.state %>
 Ahead:     <%= status.ahead %>
 Behind:    <%= status.behind %>

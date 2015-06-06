@@ -20,6 +20,10 @@ class GitStatus
 		return to!string(cstatus.branch);
 	}
 
+	@property string tag() {
+		return to!string(cstatus.tag);
+	}
+
 	@property int new_files() {
 		return cstatus.new_files;
 	}
