@@ -20,7 +20,14 @@ void get_branch(git_repository *repo, git_status *status) {
 
     git_reference *head = NULL;
     git_repository_head(&head, repo);
-    status->branch = git_reference_shorthand(head);
+    if (git_reference_is_branch(head))
+        status->branch = git_reference_shorthand(head);
+    else
+        status->branch = NULL;
+}
+
+void get_tag(git_repository *repo, git_status *status) {
+    
 }
 
 void get_state(git_repository *repo, git_status *status) {

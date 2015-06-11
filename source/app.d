@@ -67,10 +67,10 @@ int main(string[] args)
 		case "debug":
 			print_debug(status);
 			break;
+		default:
 		case "simple":
 			print_simple(status);
 			break;
-		default:
 		case "mustache":
 			print_mustache(status);
 			break;
