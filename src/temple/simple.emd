@@ -2,8 +2,8 @@
 % import std.string;
 % import std.conv;
 % GitStatus status = var.status.get!GitStatus;
-<% if (status.path) { %>
-<%=
+<% if (status.path) {
+%><%=
     status.branch?status.branch:"EMPTY"
 %><%=
     status.ahead?"▲"~to!string(status.ahead):""
@@ -19,5 +19,5 @@
     status.stash?"▷"~to!string(status.stash):""
 %><%=
     status.state?"◊"~status.state_name:""
-%>
-<% } %>
+%><%
+} %>

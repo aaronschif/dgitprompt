@@ -1,4 +1,5 @@
 import std.stdio : writeln, write;
+import std.getopt : getopt, defaultGetoptPrinter;
 import temple;
 import mustache;
 
@@ -59,21 +60,36 @@ void print_debug(GitStatus status) {
 
 int main(string[] args)
 {
-	auto status = new GitStatus();
-	if (args.length < 2)
-		args ~= "mustache";
+	bool doQuery;
+	string formatter = "simple";
+	auto helpInfo = getopt(
+			args,
+			"q|query", "Return 1 if there is no git repo.", &doQuery,
+			"f|format", "The formatter to use.", &formatter
+		);
+	if (helpInfo.helpWanted)
+	{
+		defaultGetoptPrinter("Some information about the program.",
+			helpInfo.options);
+		return 0;
+	}
 
-	switch(args[1]) {
+	auto status = new GitStatus();
+	switch(formatter) {
 		case "debug":
 			print_debug(status);
 			break;
-		default:
 		case "simple":
 			print_simple(status);
 			break;
 		case "mustache":
 			print_mustache(status);
 			break;
+		default:
+			writeln("Formatter not found.");
+			break;
 	}
+	if (doQuery)
+		return status.path?0:1;
 	return 0;
 }
