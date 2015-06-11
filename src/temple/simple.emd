@@ -6,6 +6,8 @@
 %><%=
     status.branch?status.branch:"EMPTY"
 %><%=
+    status.tag?status.tag:""
+%><%=
     status.ahead?"▲"~to!string(status.ahead):""
 %><%=
     status.behind?"▼"~to!string(status.behind):""

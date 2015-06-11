@@ -24,6 +24,9 @@ void print_mustache(GitStatus status) {
 	if (status.branch) context.useSection("BRANCH");
 	context["branch"] = status.branch;
 
+	if (status.tag) context.useSection("TAG");
+	context["tag"] = status.tag;
+
 	if (status.state) context.useSection("STATE");
 	context["state_string"] = status.state_name;
 	context["state"] = status.state;
