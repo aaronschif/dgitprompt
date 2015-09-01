@@ -1,16 +1,16 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"memutils": "0.3.6",
+		"dlibgit": "0.50.4",
+		"mustache-d": "0.1.1",
+		"libasync": "0.7.5",
 		"pathlib": "0.1.2",
-		"temple": "0.7.3",
-		"vibe-d": "0.7.23",
+		"memutils": "0.3.6",
+		"openssl": "1.1.4+1.0.1g",
+		"vibe-d": "0.7.24",
+		"temple": "0.7.4",
 		"libevent": "2.0.1+2.0.16",
 		"libgit2": "0.20.1",
-		"dlibgit": "0.50.4",
-		"openssl": "1.1.4+1.0.1g",
-		"libev": "5.0.0+4.04",
-		"libasync": "0.7.1",
-		"mustache-d": "0.1.1"
+		"libev": "5.0.0+4.04"
 	}
 }
