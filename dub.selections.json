@@ -1,11 +1,10 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"dlibgit": "0.50.4",
 		"mustache-d": "0.1.1",
 		"libasync": "0.7.5",
 		"pathlib": "0.1.2",
-		"memutils": "0.3.6",
+		"memutils": "0.4.1",
 		"openssl": "1.1.4+1.0.1g",
 		"vibe-d": "0.7.24",
 		"temple": "0.7.4",
