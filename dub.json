@@ -5,10 +5,10 @@
 	"authors": ["aaron"],
 	"versions": ["VibeCustomMain"],
 	"preGenerateCommands-posix": ["make cdeps"],
+	"libs-posix": ["git2"],
 	"lflags": ["./source/c/git.o"],
 	"dflags": ["-Jsrc/temple"],
 	"dependencies": {
-		"libgit2": "~>0.20.1",
 		"temple": "~>0.7.3",
 		"pathlib": "~>0.1.2",
 		"mustache-d": "~>0.1.1"
