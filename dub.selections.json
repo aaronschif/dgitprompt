@@ -2,14 +2,13 @@
 	"fileVersion": 1,
 	"versions": {
 		"mustache-d": "0.1.1",
-		"libasync": "0.7.5",
+		"libasync": "0.7.8",
 		"pathlib": "0.1.2",
 		"memutils": "0.4.1",
 		"openssl": "1.1.4+1.0.1g",
-		"vibe-d": "0.7.24",
-		"temple": "0.7.4",
+		"vibe-d": "0.7.28",
+		"temple": "0.7.1",
 		"libevent": "2.0.1+2.0.16",
-		"libgit2": "0.20.1",
 		"libev": "5.0.0+4.04"
 	}
 }
