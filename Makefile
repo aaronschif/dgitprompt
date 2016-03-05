@@ -1,4 +1,5 @@
 PREFIX ?= /usr
+FLAGS ?= -pg
 
 dgitprompt:
 	dub build
@@ -12,7 +13,7 @@ source/c/git.di: source/c/git.o
 	touch $@
 
 source/c/git.o: source/c/git.c
-	gcc -c $< -o $@
+	gcc  -Wall ${FLAGS} -c $< -o $@
 
 install: dgitprompt
 	install dgitprompt ${PREFIX}/bin/dgitprompt

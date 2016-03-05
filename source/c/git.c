@@ -97,7 +97,6 @@ void get_changes(git_repository *repo, git_status *status) {
 void get_hash(git_repository *repo, git_status *status) {
     const git_oid *local_oid;
     git_reference *head;
-    git_tag *tag;
 
     if (git_repository_head(&head, repo)) return;
     local_oid = git_reference_target(head);
