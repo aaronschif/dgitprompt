@@ -4,9 +4,11 @@
 % GitStatus status = var.status.get!GitStatus;
 <% if (status.path) {
 %><%=
-    status.branch?status.branch:"EMPTY"
-%><%=
-    status.tag?status.tag:""
+    status.branch.length?status.branch:(
+        status.tag.length?status.tag:(
+            status.hash_short.length?status.hash_short:
+                "EMPTY")
+    )
 %><%=
     status.ahead?"▲"~to!string(status.ahead):""
 %><%=

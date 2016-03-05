@@ -10,6 +10,7 @@ struct CGitStatus{
     int state;
     const(char) *tag;
     const(char) *branch;
+    const(char) *hash;
 };
 
 void find_status(CGitStatus*, immutable(char)*);

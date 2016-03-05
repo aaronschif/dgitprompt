@@ -10,6 +10,7 @@ typedef struct GitStatus{
     int state;
     const char *tag;
     const char *branch;
+    const char *hash;
 } git_status;
 
 void get_branch(git_repository *repo, git_status *status) {
@@ -93,6 +94,17 @@ void get_changes(git_repository *repo, git_status *status) {
       }
 }
 
+void get_hash(git_repository *repo, git_status *status) {
+    const git_oid *local_oid;
+    git_reference *head;
+    git_tag *tag;
+
+    if (git_repository_head(&head, repo)) return;
+    local_oid = git_reference_target(head);
+
+    status->hash = git_oid_tostr_s(local_oid);
+}
+
 void find_status(git_status* status, char* path) {
     git_repository *repo = NULL;
     git_libgit2_init();
@@ -104,6 +116,7 @@ void find_status(git_status* status, char* path) {
     get_stash(repo, status);
     get_remote(repo, status);
     get_changes(repo, status);
+    get_hash(repo, status);
 
     git_repository_free(repo);
     git_libgit2_shutdown();

@@ -24,6 +24,15 @@ class GitStatus
 		return to!string(cstatus.tag);
 	}
 
+	@property string hash() {
+		return to!string(cstatus.hash);
+	}
+
+	@property string hash_short() {
+		auto result = hash();
+		return result?result[0..5]:"";
+	}
+
 	@property int new_files() {
 		return cstatus.new_files;
 	}
