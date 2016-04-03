@@ -1,4 +1,5 @@
 import std.string : toStringz;
+import std.file: FileException;
 import pathlib;
 
 import c.git;
@@ -14,7 +15,7 @@ class GitStatus
 		}
 	}
 
-	string path;
+	const string path;
 
 	@property string branch() {
 		return to!string(cstatus.branch);
@@ -68,11 +69,14 @@ class GitStatus
 	private:
 	private CGitStatus cstatus;
 
-	string[] STATES = ["NONE", "MERGE", "REVERT", "CHERRYPICK", "BISECT", "REBASE",
+	const string[] STATES = ["NONE", "MERGE", "REVERT", "CHERRYPICK", "BISECT", "REBASE",
 	    "INTERACTIVE", "REBASE_MERGE", "MAILBOX", "MAILBOX_OR_REBASE"];
 
 	auto findGitPath() {
-		auto currentDir = cwd();
+		try
+			auto currentDir = cwd();
+		catch (FileException)
+			return null; // Folder might not exist.
 		foreach(path; currentDir.parents ~ currentDir) {
 			auto gitPath = path ~ ".git";
 			if (gitPath.isDir)
