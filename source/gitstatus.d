@@ -73,15 +73,20 @@ class GitStatus
 	    "INTERACTIVE", "REBASE_MERGE", "MAILBOX", "MAILBOX_OR_REBASE"];
 
 	auto findGitPath() {
+		Path currentDir;
 		try {
-			auto currentDir = cwd();
-			foreach(path; currentDir.parents ~ currentDir) {
-				auto gitPath = path ~ ".git";
-				if (gitPath.isDir)
-				return path.toString();
-			}
+			currentDir = cwd();
 		}
-		catch (FileException) {} // Folder might not exist.
+		catch (FileException) {
+			return null;
+		} // Folder might not exist.
+
+		foreach(path; currentDir.parents ~ currentDir) {
+			auto gitPath = path ~ ".git";
+			if (gitPath.isDir)
+			return path.toString();
+		}
+
 		return null;
 	}
 }
