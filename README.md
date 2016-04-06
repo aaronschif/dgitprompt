@@ -9,7 +9,7 @@
 ## Roadmap
 
 - [ ] Shared object loading.
-- [ ] Hanging error.
+- [x] Hanging error.
 - [ ] Formatter args.
 - [ ] Decide how to use mustache.
 - [ ] Cross-platform support.
