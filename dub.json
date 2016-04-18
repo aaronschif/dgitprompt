@@ -10,7 +10,6 @@
 	"dflags": ["-Jsrc/temple"],
 	"dependencies": {
 		"temple": "~>0.7.3",
-		"pathlib": "~>0.1.2",
 		"mustache-d": "~>0.1.1"
 	}
 }

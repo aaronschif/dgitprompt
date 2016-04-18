@@ -1,6 +1,7 @@
-import std.string : toStringz;
-import std.file: FileException;
-import pathlib;
+import std.string: toStringz;
+import std.file: FileException, isDir, exists;
+import std.conv: to;
+import std.path: dirName, rootName, absolutePath, buildPath;
 
 import c.git;
 
@@ -73,18 +74,20 @@ class GitStatus
 	    "INTERACTIVE", "REBASE_MERGE", "MAILBOX", "MAILBOX_OR_REBASE"];
 
 	auto findGitPath() {
-		Path currentDir;
+		string currentDir, root;
 		try {
-			currentDir = cwd();
+			currentDir = absolutePath(".");
+			root = rootName(currentDir);
 		}
 		catch (FileException) {
 			return null;
 		} // Folder might not exist.
 
-		foreach(path; currentDir.parents ~ currentDir) {
-			auto gitPath = path ~ ".git";
-			if (gitPath.isDir)
-			return path.toString();
+		while (currentDir != root) {
+			string gitPath = buildPath(currentDir, ".git");
+			if (gitPath.exists && gitPath.isDir)
+				return gitPath;
+			currentDir = dirName(currentDir);
 		}
 
 		return null;
