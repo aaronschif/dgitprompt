@@ -3,8 +3,10 @@ import std.typetuple: TypeTuple;
 import temple;
 import mustache;
 import gitstatus: GitStatus;
+import luad.all: LuaState, LuaFunction, LuaTable;
+import luad.error: LuaErrorException;
 
-alias FORMATTERS = TypeTuple!(SimpleFormat, DebugFormat, MustacheFormat);
+alias FORMATTERS = TypeTuple!(SimpleFormat, DebugFormat, MustacheFormat, LuaFormat);
 
 
 abstract class Format {
@@ -73,5 +75,36 @@ class MustacheFormat: Format {
 
 
     	return mustache.render("src/mustache/simple", context);
+    }
+}
+
+class LuaFormat: Format {
+    immutable static string name = "lua";
+    override string format(ref GitStatus status) {
+        auto lua = new LuaState();
+        lua.openLibs();
+        auto prompt_function = lua.loadString(import("lua/simple.lua"));
+        auto luaStatus = lua.newTable;
+        lua.set("status", luaStatus);
+        luaStatus["path"] = status.path;
+        luaStatus["branch"] = status.branch;
+        luaStatus["tag"] = status.tag;
+        luaStatus["hash"] = status.hash;
+        luaStatus["hash_short"] = status.hash_short;
+        luaStatus["new_files"] = status.new_files;
+        luaStatus["working_files"] = status.working_files;
+        luaStatus["index_files"] = status.index_files;
+        luaStatus["ahead"] = status.ahead;
+        luaStatus["behind"] = status.behind;
+        luaStatus["state"] = status.state;
+        luaStatus["state_name"] = status.state_name;
+        luaStatus["stash"] = status.stash;
+
+        try {
+            return prompt_function.call!string();
+        }
+        catch (LuaErrorException e) {
+            throw e;
+        }
     }
 }

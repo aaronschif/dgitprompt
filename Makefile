@@ -2,7 +2,7 @@ PREFIX ?= /usr
 FLAGS ?= -pg
 
 dgitprompt:
-	dub build
+	dub build --compiler=ldc2 --build=release
 
 cdeps: source/c/git.di source/app.d
 

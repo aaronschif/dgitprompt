@@ -5,11 +5,12 @@
 	"authors": ["aaron"],
 	"versions": ["VibeCustomMain"],
 	"preGenerateCommands-posix": ["make cdeps"],
-	"libs-posix": ["git2"],
+	"libs-posix": ["git2", "lua5.1"],
 	"lflags": ["./source/c/git.o"],
-	"dflags": ["-Jsrc/temple"],
+	"dflags": ["-Jsrc/temple", "-Jsrc"],
 	"dependencies": {
 		"temple": "~>0.7.3",
-		"mustache-d": "~>0.1.1"
+		"mustache-d": "~>0.1.1",
+		"luad": "~master"
 	}
 }

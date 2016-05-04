@@ -5,6 +5,7 @@
 		"libasync": "0.7.8",
 		"pathlib": "0.1.2",
 		"memutils": "0.4.1",
+		"luad": "~master",
 		"openssl": "1.1.4+1.0.1g",
 		"vibe-d": "0.7.28",
 		"temple": "0.7.1",
