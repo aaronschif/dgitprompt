@@ -1,12 +1,12 @@
 import std.typetuple: TypeTuple;
 
-import temple;
+/*import temple;*/
 import mustache;
 import gitstatus: GitStatus;
 import luad.all: LuaState, LuaFunction, LuaTable;
 import luad.error: LuaErrorException;
 
-alias FORMATTERS = TypeTuple!(SimpleFormat, DebugFormat, MustacheFormat, LuaFormat);
+alias FORMATTERS = TypeTuple!(MustacheFormat, DescriptiveFormat, ShellDataFormat);
 
 
 abstract class Format {
@@ -14,7 +14,7 @@ abstract class Format {
     string format (ref GitStatus status);
 }
 
-class DebugFormat: Format {
+/*class DebugFormat: Format {
     immutable static string name = "debug";
     override string format (ref GitStatus status) {
         auto ctx = new TempleContext();
@@ -35,6 +35,7 @@ class SimpleFormat: Format {
         return temp.toString(ctx);
     }
 }
+*/
 
 class MustacheFormat: Format {
     immutable static string name = "mustache";
@@ -78,12 +79,12 @@ class MustacheFormat: Format {
     }
 }
 
-class LuaFormat: Format {
-    immutable static string name = "lua";
+class DescriptiveFormat: Format {
+    immutable static string name = "descriptive";
     override string format(ref GitStatus status) {
         auto lua = new LuaState();
         lua.openLibs();
-        auto prompt_function = lua.loadString(import("lua/simple.lua"));
+        auto prompt_function = getLuaFunc(lua);
         auto luaStatus = lua.newTable;
         lua.set("status", luaStatus);
         luaStatus["path"] = status.path;
@@ -107,4 +108,20 @@ class LuaFormat: Format {
             throw e;
         }
     }
+
+    LuaFunction getLuaFunc(LuaState lua) {
+        return lua.loadString(import("lua/simple.lua"));
+    }
 }
+
+class ShellDataFormat: DescriptiveFormat {
+    immutable static string name = "shelldata";
+    override LuaFunction getLuaFunc(LuaState lua) {
+        return lua.loadString(import("lua/shelldata.lua"));
+    }
+}
+
+
+/*class FileFormat: Format {
+    */
+/*}*/

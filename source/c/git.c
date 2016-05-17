@@ -10,7 +10,7 @@ typedef struct GitStatus{
     int state;
     const char *tag;
     const char *branch;
-    const char *hash;
+    char *hash;
 } git_status;
 
 void get_branch(git_repository *repo, git_status *status) {
@@ -101,7 +101,8 @@ void get_hash(git_repository *repo, git_status *status) {
     if (git_repository_head(&head, repo)) return;
     local_oid = git_reference_target(head);
 
-    status->hash = git_oid_tostr_s(local_oid);
+    status->hash = malloc(GIT_OID_HEXSZ + 1);
+    git_oid_tostr(status->hash, GIT_OID_HEXSZ + 1, local_oid);
 }
 
 void find_status(git_status* status, char* path) {

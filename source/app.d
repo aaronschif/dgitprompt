@@ -3,7 +3,7 @@ import std.getopt : getopt, defaultGetoptPrinter;
 import std.concurrency : send, receiveTimeout, ownerTid, spawn;
 import core.time : dur, Duration;
 import gitstatus : GitStatus;
-import formatter : Format, DebugFormat, SimpleFormat, MustacheFormat, FORMATTERS;
+import formatter : Format, FORMATTERS;
 
 
 GitStatus gitStatusTimeout(in Duration d) {
@@ -34,7 +34,7 @@ int main(string[] args)
 {
 	bool doQuery;
 	float timeout = 0;
-	string formatter_str = "simple";
+	string formatter_str = "descriptive";
 	auto helpInfo = getopt(
 			args,
 			"q|query", "Return 1 if there is no git repo.", &doQuery,
