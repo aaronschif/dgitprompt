@@ -1,9 +1,10 @@
 import std.stdio : writeln, write;
 import std.getopt : getopt, defaultGetoptPrinter;
+import std.file: exists;
 import std.concurrency : send, receiveTimeout, ownerTid, spawn;
 import core.time : dur, Duration;
 import gitstatus : GitStatus;
-import formatter : Format, FORMATTERS;
+import formatter : Format, FileFormat, FORMATTERS;
 
 
 GitStatus gitStatusTimeout(in Duration d) {
@@ -60,6 +61,10 @@ int main(string[] args)
 			break;
 		}
     }
+
+	if (fmt is null && exists(formatter_str)) {
+		fmt = new FileFormat(formatter_str);
+	}
 
 	if (fmt is null) {
 		writeln("Formatter not found.");

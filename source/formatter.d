@@ -122,6 +122,15 @@ class ShellDataFormat: DescriptiveFormat {
 }
 
 
-/*class FileFormat: Format {
-    */
-/*}*/
+class FileFormat: DescriptiveFormat {
+    immutable static string name = "file";
+    string path = "";
+
+    this(string path) {
+        this.path = path;
+    }
+
+    override LuaFunction getLuaFunc(LuaState lua) {
+        return lua.loadFile(path);
+    }
+}
