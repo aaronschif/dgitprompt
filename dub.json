@@ -9,8 +9,6 @@
 	"lflags": ["./source/c/git.o"],
 	"dflags": ["-Jsrc/temple", "-Jsrc"],
 	"dependencies": {
-		"temple": "~>0.7.3",
-		"mustache-d": "~>0.1.1",
 		"luad": "~master"
 	}
 }
